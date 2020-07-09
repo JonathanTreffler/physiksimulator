@@ -1,0 +1,62 @@
+.context-menu {
+  display: none;
+  position: absolute;
+  z-index: 10;
+}
+
+.context-menu.active {
+  display: block;
+}
+
+#delete {
+    display: none;
+}
+
+#delete.active {
+    display: block;
+}
+
+.material-icons {
+  top: 1em;
+  /*left: 5px;*/
+}
+
+.flex-row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+
+.inline-hide {
+    display: none;
+}
+
+.inline-hide.active {
+    display: inline;
+}
+
+.flex-end {
+    align-self: flex-end;
+}
+
+.table-end {
+    float: right;
+}
+
+#controls {
+    flex-grow: 100;
+}
+
+.control-box {
+    width: 100%;
+}
+
+.small-input {
+    max-width: 50px;
+}

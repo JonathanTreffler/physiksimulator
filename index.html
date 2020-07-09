@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <title>Physiksim</title>
+        <meta charset="utf-8">
+        <script src="js/matter.js" type="text/javascript"></script>
+        <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
+        <script src="js/init.js" type="text/javascript" async></script>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="/css/w3.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+        <nav class="context-menu w3-white w3-bar-block">
+            <button class="w3-button w3-bar-item" onclick="changeMode(Modes.STRING)">
+                <i class="material-icons">add</i> Add String
+            </button>
+            <button class="w3-button w3-bar-item" onclick="addMass()">
+                <i class="material-icons">add</i> Add Mass
+            </button>
+            <button id="delete" class="w3-button w3-bar-item" onclick="deleteBody()" display="hidden">
+                <i class="material-icons">delete</i> Remove Body
+            </button>
+            <button class="w3-button w3-bar-item gravity-button" onclick="toggleGravity()">
+                <i class="material-icons inline-hide active gravity">pause</i><i class="material-icons inline-hide gravity">play_arrow</i> Toggle Gravity
+            </button>
+        </nav>
+        <div id="content" class="w3-container">
+            <div class="flex-row">
+                <canvas id="matter"></canvas>
+                <div id="controls" class="w3-container">
+                
+                
+                    <h2>Controls</h2>
+                    
+                    <h3>Body Options<p id="bodyLabel" class="inline-hide"></p></h3>
+                    <table class="controlbox" style="width:100%">
+                        <tr>
+                            <td>
+                                <label class="table-start">Insertion Mode:</label>
+                            </td>
+                            <td>
+                                <select id="insertionDropdown" class="table-end" onChange="onInsertionDropdownChanged()">
+                                    <option value="rect">Rectangle</option>
+                                    <option value="circle">Circle</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="table-start">Mass:</label>
+                            </td>
+                            <td>
+                                <input id="add_mass_number" class="table-end small-input" onChange="onMassNumberChanged()" size="1" minlength="1" maxlength="1" type="number" value="3">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="table-start">Size:</label>
+                            </td>
+                            <td>
+                                <input id="sizeInput" class="table-end small-input" size="1" minlength="1" maxlength="1" type="number" value="80">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="table-start">Friction:</label>
+                            </td>
+                            <td>
+                                <input type="range" min="0.01" max="1" value="0.6" step="0.01" class="table-end" onChange="onFrictionSliderChanged()" id="frictionSlider">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="table-start">Air Friction:</label>
+                            </td>
+                            <td>
+                                <input type="range" min="0.01" max="1" value="0.01" step="0.01" class="table-end" onChange="onFrictionAirSliderChanged()" id="frictionAirSlider">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="table-start">Restitution:</label>
+                            </td>
+                            <td>
+                                <input type="range" min="0" max="1" value="0" step="0.01" class="table-end" onChange="onRestitutionSliderChanged()" id="restitutionSlider">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="table-start">Static:</label>
+                            </td>
+                            <td>
+                                <input id="add_mass_static_checkbox" class="table-end" onChange="onStaticCheckboxChanged()" type="checkbox" />
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <h3>Canvas Options</h3>
+                    <button class="w3-button gravity-button" onclick="toggleGravity()">
+                        <i class="material-icons inline-hide active gravity">pause</i><i class="material-icons inline-hide gravity">play_arrow</i> Toggle Gravity
+                    </button>
+                    <button class="w3-button" onclick="toggleWireframes()">
+                        <i class="material-icons inline-hide wireframe active">border_all</i><i class="material-icons inline-hide wireframe">border_clear</i> Toggle Wireframes
+                    </button>
+                    <br>
+                    <br>
+                    <button class="w3-button w3-red" onclick="onPresetDropdownChanged()">
+                        <i class="material-icons">restore</i> Reset Canvas
+                    </button>
+                    <button class="w3-button w3-red inline-hide exit-string-mode" onclick="changeMode(Modes.SIM)">
+                        <i class="material-icons">clear</i> Exit String Mode
+                    </button>
+                    
+                    <h3>Presets</h3>
+                    <table class="controlbox" style="width:100%">
+                        <tr>
+                            <td>
+                                <label class="table-start">Load Preset:</label>
+                            </td>
+                            <td>
+                                <select id="presetDropdown" class="table-end" onChange="onPresetDropdownChanged()">
+                                    <option value="none">No Preset</option>
+                                    <option value="atwood">Atwoodsche Fallmaschine</option>
+                                    <option value="table">Table</option>
+                                    <option value="newtons-cradle">Newton's Cradle</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="explanation">
+                <h2>How To Use</h2>
+                <p>Open Context Menu: <i>RMB</i></p>
+                <p>Change Body Settings: <i>Click Body To Edit</i></p>
+            </div>
+        </div>
+    </body>
+</html>
